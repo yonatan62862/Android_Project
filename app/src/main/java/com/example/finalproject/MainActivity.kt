@@ -3,6 +3,7 @@ package com.example.finalproject
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,44 +25,12 @@ class MainActivity : AppCompatActivity() {
         // Step 3 - Create AddStudentLayout
         // Step 4 - Save Student
 
-        Log.d("ACTIVITY", "onCreate $savedInstanceState")
 
-        val intent = Intent(this, MainActivity2::class.java)
-        startActivity(intent)
-
-        finish()
-
+        val addStudentButton: Button = findViewById(R.id.main_activity_add_student_button)
+        addStudentButton.setOnClickListener {
+            val intent = Intent(this, AddStudentActivity::class.java)
+            startActivity(intent)
+        }
     }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("ACTIVITY", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("ACTIVITY", "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("ACTIVITY", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("ACTIVITY", "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("ACTIVITY", "onRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("ACTIVITY", "onDestroy")
-    }
-
 
 }
