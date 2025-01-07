@@ -1,34 +1,31 @@
 package com.example.finalproject
 
 import android.os.Bundle
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+
 
 
 class MainActivity : AppCompatActivity() {
 
-    var blueFragment: BlueFragment? = null
-
-    private var fragmentOne: StudentsListFragment? = null
-    private var fragmentTwo: BlueFragment? = null
-    private var fragmentThree: BlueFragment? = null
-    private var fragmentFour: BlueFragment? = null
-    private var buttonOne: Button? = null
-    private var buttonTwo: Button? = null
-    private var buttonThree: Button? = null
-    private var buttonFour: Button? = null
-
-    private var inDisplayFragment: Fragment? = null
+    var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.students_list_activity_recycler_view)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -48,71 +45,29 @@ class MainActivity : AppCompatActivity() {
         // TODO: 3 - Connect list fragment with blue fragment action with back button
         // TODO: 4 - Set navArgs for blue fragment
 
-        fragmentOne = StudentsListFragment()
-        fragmentTwo = BlueFragment.newInstance("2️⃣")
-        fragmentThree = BlueFragment.newInstance("3️⃣")
-        fragmentFour = BlueFragment.newInstance("4️⃣")
-
-         buttonOne = findViewById(R.id.main_activity_button_one)
-         buttonTwo = findViewById(R.id.main_activity_button_two)
-         buttonThree = findViewById(R.id.main_activity_button_three)
-         buttonFour = findViewById(R.id.main_activity_button_four)
-
-        buttonOne?.setOnClickListener {
-            display(fragmentOne)
-
+        val toolbar: Toolbar = findViewById(R.id.main_toolbar)
+        setSupportActionBar(toolbar)
+        val navHostFragment: NavHostFragment? = supportFragmentManager.findFragmentById(R.id.main_nav_host) as? NavHostFragment
+        navController = navHostFragment?.navController
+        navController?.let {
+            NavigationUI.setupActionBarWithNavController(
+                activity = this,
+                navController = it
+            )
         }
-
-        buttonTwo?.setOnClickListener {
-            display(fragmentTwo)
-
-        }
-
-        buttonThree?.setOnClickListener {
-            display(fragmentThree)
-
-        }
-
-        buttonFour?.setOnClickListener {
-            display(fragmentFour)
-
-        }
-
-        display(fragmentOne)
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_bar)
+        navController?.let { NavigationUI.setupWithNavController(bottomNavigationView, it) }
     }
-    private fun display(fragment: Fragment?) {
-        fragment?.let {
-            supportFragmentManager.beginTransaction().apply {
-                add(R.id.main_activity_frame_layout, it)
-                inDisplayFragment?.let {
-                    remove(it)
-                }
-                addToBackStack("TAG")
-                commit()
-            }
-            inDisplayFragment = fragment
-        }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
-    private fun removeFragment() {
-        blueFragment?.let { fragment ->
-            supportFragmentManager.beginTransaction().apply {
-                remove(fragment)
-                commit()
-            }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> navController?.popBackStack()
+            else -> navController?.let { NavigationUI.onNavDestinationSelected(item, it) }
         }
-        blueFragment = null
+        return true
     }
 
-
-    fun addFragment() {
-        blueFragment = BlueFragment.newInstance("This is my text 👨‍🎓")
-        blueFragment?.let {
-            supportFragmentManager.beginTransaction().apply {
-                add(R.id.main_activity_frame_layout, it)
-                addToBackStack("TAG")
-                commit()
-            }
-
-        }
-    }
 }
