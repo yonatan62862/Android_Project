@@ -34,10 +34,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // TODO: Step 1 - Add Student Button
-        // TODO: Step 2 - Navigate to AddStudentActivity
-        // TODO: Step 3 - Create AddStudentLayout
-        // TODO: Step 4 - Save Student
 
         // TODO: 1 - Set MainActivity Launcher ✅
         // TODO: 2 - Create fragment from xml ✅
@@ -46,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         // TODO: 5 - Create a tab bar with multiple fragments 👨‍🎓
         // TODO: 6 - Refactor students list
         // TODO: 7 - GPS/Firebase
+
+        // TODO: 1 - Set up project
+        // TODO: 2 - Create nav_graph.xml and connect to nav host
+        // TODO: 3 - Connect list fragment with blue fragment action with back button
+        // TODO: 4 - Set navArgs for blue fragment
 
         fragmentOne = StudentsListFragment()
         fragmentTwo = BlueFragment.newInstance("2️⃣")
