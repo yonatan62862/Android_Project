@@ -22,6 +22,13 @@ class StudentsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // TODO: Set DB
+        // TODO: Refactor Model to support local db
+        // TODO: Refactor Fragments to work with live data
+        // TODO: Add progress indicator for better UX
+        // TODO: Migrate to ViewBinding
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_students_list, container, false)
 

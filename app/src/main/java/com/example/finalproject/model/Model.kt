@@ -1,6 +1,6 @@
 package com.example.finalproject.model
 
-class Model private  constructor() {
+class Model private constructor() {
 
     val students: MutableList<Student> = ArrayList()
 
