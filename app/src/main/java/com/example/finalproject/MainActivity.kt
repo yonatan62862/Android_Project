@@ -1,36 +1,117 @@
 package com.example.finalproject
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+
 
 class MainActivity : AppCompatActivity() {
+
+    var blueFragment: BlueFragment? = null
+
+    private var fragmentOne: StudentsListFragment? = null
+    private var fragmentTwo: BlueFragment? = null
+    private var fragmentThree: BlueFragment? = null
+    private var fragmentFour: BlueFragment? = null
+    private var buttonOne: Button? = null
+    private var buttonTwo: Button? = null
+    private var buttonThree: Button? = null
+    private var buttonFour: Button? = null
+
+    private var inDisplayFragment: Fragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.students_list_activity_recycler_view)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Step 1 - Add Student Button
-        // Step 2 - Navigate to AddStudentActivity
-        // Step 3 - Create AddStudentLayout
-        // Step 4 - Save Student
+        // TODO: Step 1 - Add Student Button
+        // TODO: Step 2 - Navigate to AddStudentActivity
+        // TODO: Step 3 - Create AddStudentLayout
+        // TODO: Step 4 - Save Student
 
+        // TODO: 1 - Set MainActivity Launcher ✅
+        // TODO: 2 - Create fragment from xml ✅
+        // TODO: 3 - Create a fragment programmatically ✅
+        // TODO: 4 - Manage nav args ✅
+        // TODO: 5 - Create a tab bar with multiple fragments 👨‍🎓
+        // TODO: 6 - Refactor students list
+        // TODO: 7 - GPS/Firebase
 
-        val addStudentButton: Button = findViewById(R.id.main_activity_add_student_button)
-        addStudentButton.setOnClickListener {
-            val intent = Intent(this, AddStudentActivity::class.java)
-            startActivity(intent)
+        fragmentOne = StudentsListFragment()
+        fragmentTwo = BlueFragment.newInstance("2️⃣")
+        fragmentThree = BlueFragment.newInstance("3️⃣")
+        fragmentFour = BlueFragment.newInstance("4️⃣")
+
+         buttonOne = findViewById(R.id.main_activity_button_one)
+         buttonTwo = findViewById(R.id.main_activity_button_two)
+         buttonThree = findViewById(R.id.main_activity_button_three)
+         buttonFour = findViewById(R.id.main_activity_button_four)
+
+        buttonOne?.setOnClickListener {
+            display(fragmentOne)
+
+        }
+
+        buttonTwo?.setOnClickListener {
+            display(fragmentTwo)
+
+        }
+
+        buttonThree?.setOnClickListener {
+            display(fragmentThree)
+
+        }
+
+        buttonFour?.setOnClickListener {
+            display(fragmentFour)
+
+        }
+
+        display(fragmentOne)
+    }
+    private fun display(fragment: Fragment?) {
+        fragment?.let {
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.main_activity_frame_layout, it)
+                inDisplayFragment?.let {
+                    remove(it)
+                }
+                addToBackStack("TAG")
+                commit()
+            }
+            inDisplayFragment = fragment
         }
     }
+    private fun removeFragment() {
+        blueFragment?.let { fragment ->
+            supportFragmentManager.beginTransaction().apply {
+                remove(fragment)
+                commit()
+            }
+        }
+        blueFragment = null
+    }
 
+
+    fun addFragment() {
+        blueFragment = BlueFragment.newInstance("This is my text 👨‍🎓")
+        blueFragment?.let {
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.main_activity_frame_layout, it)
+                addToBackStack("TAG")
+                commit()
+            }
+
+        }
+    }
 }
