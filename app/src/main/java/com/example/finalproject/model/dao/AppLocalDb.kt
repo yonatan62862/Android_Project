@@ -7,13 +7,13 @@ import com.example.finalproject.base.MyApplication
 import com.example.finalproject.model.Student
 
 
-@Database(entities = [Student::class], version = 1)
+@Database(entities = [Student::class], version = 2)
 abstract class AppLocalDbRepository: RoomDatabase() {
     abstract fun studentDao(): StudentDao
 }
 
 
-class AppLocalDb {
+object AppLocalDb {
     val database: AppLocalDbRepository by lazy {
         val context = MyApplication.Globals.context ?: throw IllegalStateException("Application context is missing")
         Room.databaseBuilder(

@@ -8,8 +8,12 @@ import com.example.finalproject.R
 import com.example.finalproject.model.Student
 
 
-class StudentsRecyclerAdapter(private val students: List<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
+class StudentsRecyclerAdapter(private var students: List<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
     var listener: OnItemClickListener? = null
+
+    fun set(students: List<Student>?) {
+        this.students = students
+    }
 
     override fun getItemCount(): Int = students?.size ?: 0
 
