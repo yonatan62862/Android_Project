@@ -12,16 +12,15 @@
         tools:layout="@layout/fragment_students_list">
         <action
             android:id="@+id/action_studentsListFragment_to_blueFragment"
-            app:destination="@id/blueFragment" />
+            app:destination="@id/studentDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/blueFragment"
-        android:name="com.example.finalproject.BlueFragment"
-        android:label="fragment_blue"
-        tools:layout="@layout/fragment_blue" >
+        android:id="@+id/studentDetailsFragment"
+        android:name="com.example.finalproject.StudentDetailsFragment"
+        android:label="Student Details">
         <argument
-            android:name="studentTitle"
-            app:argType="string" />
+            android:name="student"
+            app:argType="com.example.finalproject.model.Student" />
     </fragment>
     <fragment
         android:id="@+id/addStudentFragment"

@@ -28,11 +28,7 @@ class StudentsListFragment : Fragment() {
     ): View? {
 
         binding = FragmentStudentsListBinding.inflate(inflater, container, false)
-        // TODO: Set DB ✅
-        // TODO: Refactor Model to support local db ✅
-        // TODO: Refactor Fragments to work with live data ✅
-        // TODO: Add progress indicator for better UX
-        // TODO: Migrate to ViewBinding
+
 
         binding?.recyclerView?.setHasFixedSize(true)
 
@@ -48,11 +44,10 @@ class StudentsListFragment : Fragment() {
 
             override fun onItemClick(student: Student?) {
                 Log.d("TAG", "On student clicked name: ${student?.name}")
-//                Navigation.findNavController(view).navigate(R.id.action_studentsListFragment_to_blueFragment)
                 student?.let {
-                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(it.name)
-                    binding?.root?.let {
-                        Navigation.findNavController(it).navigate(action)
+                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(it)
+                    binding?.root?.let {view ->
+                        Navigation.findNavController(view).navigate(action)
                     }
                 }
             }

@@ -28,17 +28,6 @@ class StudentsListViewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // 1. Set xml layout✅
-        // 2. Set instance of list view in activity✅
-        // 3. Set adapter✅
-        // 4. Create rows layout✅
-        // 5. Set dynamic data (MVP)✅
-        // 6. On click on checkbox ✅
-
-//        students = Model.shared.students
-//        val listView: ListView = findViewById(R.id.students_list_view)
-//        listView.adapter = StudentsAdapter()
     }
 
     inner class StudentsAdapter(): BaseAdapter() {
@@ -70,25 +59,6 @@ class StudentsListViewActivity : AppCompatActivity() {
                 }
             }
 
-//            var view = convertView
-//            if (view == null) {
-//                view = inflation.inflate(R.layout.student_list_row, parent, false)
-//                Log.d("TAG", "Inflating position $position")
-//                val checkBox: CheckBox? = view?.findViewById(R.id.student_row_check_box)
-////                checkBox?.setOnClickListener {
-////                    student?.isChecked = checkBox.isChecked
-////                }
-//
-//                checkBox?.apply {
-//                    setOnClickListener { view ->
-//                        (tag as? Int)?.let { tag ->
-//                            val student = students?.get(tag)
-//                            student?.isChecked = (view as? CheckBox)?.isChecked ?: false
-//                        }
-//
-//                    }
-//                }
-//            }
             val student = students?.get(position)
 
             val nameTextView: TextView? = view?.findViewById(R.id.student_row_name_text_view)
@@ -98,7 +68,6 @@ class StudentsListViewActivity : AppCompatActivity() {
 
             nameTextView?.text = student?.name
             idTextView?.text = student?.id
-//            checkBox?.isChecked = student?.isChecked ?: false
 
             checkBox?.apply {
                 isChecked = student?.isChecked ?: false

@@ -50,6 +50,8 @@ class AddStudentFragment : Fragment() {
             name = binding?.nameEditText?.text?.toString() ?: "",
             id = binding?.idEditText?.text?.toString() ?: "",
             avatarUrl = "",
+            address = binding?.addressEditText?.text?.toString() ?: "",
+            phone = binding?.phoneEditText?.text?.toString() ?: "",
             isChecked = false
         )
         binding?.progressBar?.visibility = View.VISIBLE
