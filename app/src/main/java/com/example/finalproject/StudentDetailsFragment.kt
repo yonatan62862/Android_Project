@@ -10,6 +10,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.finalproject.model.Student
 
 
@@ -47,11 +48,14 @@ class StudentDetailsFragment : Fragment() {
         checkBox.isChecked = student?.isChecked ?: false
 
 
-//        editButton.setOnClickListener {
-//            val action = StudentDetailsFragmentDirections
-//                .actionStudentDetailsFragmentToEditStudentFragment(student)
-//            Navigation.findNavController(view).navigate(action)
-//        }
+        editButton.setOnClickListener {
+            student?.let {
+                val action = StudentDetailsFragmentDirections
+                    .actionStudentDetailsFragmentToEditStudentFragment(it)
+                findNavController().navigate(action)
+            }
+        }
+
         return view
     }
 }

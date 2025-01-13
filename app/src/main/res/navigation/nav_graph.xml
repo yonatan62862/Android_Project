@@ -11,8 +11,11 @@
         android:label="Students List"
         tools:layout="@layout/fragment_students_list">
         <action
-            android:id="@+id/action_studentsListFragment_to_blueFragment"
+            android:id="@+id/action_studentsListFragment_to_studentDetailsFragment"
             app:destination="@id/studentDetailsFragment" />
+        <action
+            android:id="@+id/action_studentsListFragment_to_addStudentFragment2"
+            app:destination="@id/addStudentFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentDetailsFragment"
@@ -21,6 +24,9 @@
         <argument
             android:name="student"
             app:argType="com.example.finalproject.model.Student" />
+        <action
+            android:id="@+id/action_studentDetailsFragment_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
     </fragment>
     <fragment
         android:id="@+id/addStudentFragment"
@@ -28,4 +34,13 @@
         android:label="Add Student"
         tools:layout="@layout/fragment_add_student" />
     <action android:id="@+id/action_global_addStudentFragment" app:destination="@id/addStudentFragment" />
-</navigation>
+    <fragment
+        android:id="@+id/editStudentFragment"
+        android:name="com.example.finalproject.EditStudentFragment"
+        android:label="fragment_edit_student"
+        tools:layout="@layout/fragment_edit_student">
+    <argument
+        android:name="student"
+        app:argType="com.example.finalproject.model.Student" />
+    </fragment>
+    </navigation>
