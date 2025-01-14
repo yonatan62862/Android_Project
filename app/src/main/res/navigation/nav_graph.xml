@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/editStudentFragment"
         android:name="com.example.finalproject.EditStudentFragment"
-        android:label="fragment_edit_student"
+        android:label="Edit Student"
         tools:layout="@layout/fragment_edit_student">
     <argument
         android:name="student"
